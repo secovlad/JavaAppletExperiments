@@ -89,8 +89,8 @@ public class MovingTextApplet extends Applet implements KeyListener{
 		// the numbers are the result of manual tweaking (and it's still pretty buggy)
 		if (right == true) { 
 			xstr += textMoveSpeed; 
-			if (xstr >= getWidth() - 75) 
-				xstr = getWidth(); 
+			if (xstr >= getWidth() - 100) 
+				xstr = getWidth() - 100; 
 		}	
 		else if (left == true) { 
 			xstr -= textMoveSpeed; 
@@ -99,23 +99,25 @@ public class MovingTextApplet extends Applet implements KeyListener{
 		}
 		else if (up == true) { 
 			ystr -= textMoveSpeed; 
-			if (ystr <= 10) 
-				ystr = 10; 
+			if (ystr <= 20) 
+				ystr = 20; 
 		}	
-		else if (down == true) { 				// TWEAK HERE WITH textMoveSpeed
+		else if (down == true) { 				
 			ystr += textMoveSpeed; 
 			if (ystr >= getHeight() - 5) 
 				ystr = getHeight();;
 		}	
 		
 		if (fontSizeUp == true) {
-			Font upFont = new Font("Arial", Font.PLAIN, fontSize += 2);
-			textMoveSpeed += 2;
+			if (fontSize > 48) fontSize = 48; // setting some hard limits
+			Font upFont = new Font("Arial", Font.PLAIN, fontSize+=2);
+			textMoveSpeed ++;
 			graphics.setFont(upFont);
 		}
 		else if (fontSizeDown == true) {
-			Font downFont = new Font("Arial", Font.PLAIN, fontSize -= 2);
-			textMoveSpeed -= 2;
+			if (fontSize < 12) fontSize = 12; // hard limits
+			Font downFont = new Font("Arial", Font.PLAIN, fontSize-=2);
+			textMoveSpeed --;
 			graphics.setFont(downFont);
 		}
 		else if (colorChange == true){
